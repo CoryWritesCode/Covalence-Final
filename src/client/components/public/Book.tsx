@@ -6,8 +6,9 @@ interface P {
   id: string,
   title: string,
   price: number,
-  editable: boolean,
-  key: number
+  editable?: boolean,
+  key: number,
+  handleClick?: any
 }
 
 export default function Book (props: P) {
@@ -15,7 +16,7 @@ export default function Book (props: P) {
   if (props.editable) {
     buttons = [
       <React.Fragment>
-        <a href="#" className="card-link">Edit</a>
+        <a onClick={props.handleClick} href="#" className="card-link">Edit</a>
         <a href="#" className="card-link">Delete</a>
       </React.Fragment>
     ];

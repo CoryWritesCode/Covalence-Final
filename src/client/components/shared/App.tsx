@@ -6,6 +6,7 @@ import Categories from '../public/Categories';
 import Books from '../public/Books';
 import Login from '../admin/Login';
 import Admin from '../admin/Admin';
+import Edit from '../admin/Edit';
 
 export default function App () {
     return (
@@ -15,11 +16,13 @@ export default function App () {
                     <Link to='/'>Home</Link>
                     <Link to="/books">Books</Link>
                     <Link to="/login">Login</Link>
-                    <Link to="/admin">Admin</Link>                    
+                    <Link to="/admin">Admin</Link>     
+                                   
                     <Route exact path="/" component={Home} />
                     <Route exact path="/books" component={Books} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/admin" component={Admin} />
+                    <Route exact path="/books/:id" component={Edit} />
                 </>
             </Router>
         </React.Fragment>
