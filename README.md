@@ -1,17 +1,15 @@
-# Barebones React/TypeScript/Express/Sass Boilerplate
-This project is a starting point for a TypeScript based React app that also has a local API server using express.
+# Covalence Final project
 
-There are 2 different Webpack configurations. One for the server and one for the client.
+## Before
 
-## Server
-The server build process compiles the TypeScript files found in `/src/server` into a single bundled JavaScript file located in the `/dist` directory.
+* `git clone`
 
-## Client
-The client build process compiles the React app located in `/src/client` into a bundled located at `/public/js/app.js`.
+* `npm install`
 
-The client configuration will also build the Sass files found at `/src/client/scss`. The App component imports the `app.scss` file which already includes an import for Bootstrap.
+## To run dev
 
-## Running the project
-In order to run the server, use `npm run dev`, and the server will start on port 3000 (http://localhost:3000). 
+`npm run dev`
 
-Webpack will watch the files. Once you save a file, you can refresh your browser to ensure you got the updated client files. If you only change server files, you *shouldn't* need to refresh.
+## To run production
+
+`npm start`
