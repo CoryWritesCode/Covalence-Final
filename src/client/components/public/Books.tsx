@@ -1,12 +1,15 @@
 import * as React from 'react';
 import Book from './Book';
+import {json} from '../../utils/api';
+import { RouteComponentProps } from 'react-router-dom';
 
-interface P {
+interface P extends RouteComponentProps {
 
 }
 
 interface S {
   books: { [x: string]: any; },
+  editable: boolean
 }
 
 export default class Books extends React.Component<P, S> {
@@ -14,13 +17,27 @@ export default class Books extends React.Component<P, S> {
     super(props)
 
     this.state = {
-      books: []
+      books: [],
+      editable: false
+    }
+  }
+
+  async componentWillMount () {
+    try {
+      let books = await json('http://localhost:3000/api/books');
+      this.setState({
+        books: books
+      });
+    } catch (e) {
+      console.error(e);
+      throw (e);
     }
   }
 
   render () {
     var {
-      books
+      books,
+      editable
     } = this.state;
     var keys = Object.keys(books);
 
@@ -33,6 +50,7 @@ export default class Books extends React.Component<P, S> {
           let title: string = books[val].title;
           let price: number = books[val].price;
           return <Book
+            editable={editable}
             categoryid={categoryid}
             author={author}
             title={title}
@@ -41,5 +59,6 @@ export default class Books extends React.Component<P, S> {
             id={`${id}`} />
         })}
       </React.Fragment>
+    )
   }
 }

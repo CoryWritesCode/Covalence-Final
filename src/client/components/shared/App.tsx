@@ -13,10 +13,13 @@ export default function App () {
             <Router>
                 <>
                     <Link to='/'>Home</Link>
-                    <Route exact path="/" component={Home} />
                     <Link to="/books">Books</Link>
+                    <Link to="/login">Login</Link>
+                    <Link to="/admin">Admin</Link>                    
+                    <Route exact path="/" component={Home} />
                     <Route exact path="/books" component={Books} />
-
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/admin" component={Admin} />
                 </>
             </Router>
         </React.Fragment>
