@@ -11,7 +11,12 @@ router.post('/', async (req, res) => {
     let user = req.body;
     user.password = HashPassword(user.password);
     let result: any = await DB.Users.insert(user);
-    let token: any = await CreateToken({ userid: result.insertId })
+    let token: any = await CreateToken({ userid: result.insertId });
+    res.json({
+      token,
+      role: result.role,
+      userid: result.id
+    })
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
