@@ -53,7 +53,13 @@ router.delete('/:id', isAdmin, async (req, res) => {
 
 router.put('/:id', isAdmin, async (req, res) => {
   try {
-
+    let id = req.params.id;
+    let catId = req.body.categoryId;
+    let title = req.body.title;
+    let author = req.body.author;
+    let price = req.body.price;
+    let result = await DB.Books.update(id, catId, title, author, price);
+    res.json(result);
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
