@@ -3,7 +3,7 @@ import DB from '../../db';
 
 const router = express.Router();
 
-router.get('/id:', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     let [user] = await DB.Users.oneById(req.params.id);
     res.json(user);
