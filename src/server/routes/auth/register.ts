@@ -7,10 +7,14 @@ import { CreateToken } from '../../utils/security/tokens';
 const router = express.Router();
 
 router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
     let user = req.body;
+    console.log(user.body);
     user.password = HashPassword(user.password);
+    console.log(user.password);
     let result: any = await DB.Users.insert(user);
+    console.log(result);
     let token: any = await CreateToken({ userid: result.insertId });
     res.json({
       token,

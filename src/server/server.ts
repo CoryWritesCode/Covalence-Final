@@ -1,5 +1,6 @@
-import * as path from 'path';
 import * as express from 'express';
+import * as cors from 'cors';
+import * as path from 'path';
 import * as passport from 'passport';
 import './middleware/bearerstrategy';
 import './middleware/localstrategy';
@@ -10,8 +11,9 @@ const app = express();
 let p = path.join(__dirname, '../public');
 console.log(p);
 
+app.use(cors());
+app.use(express.json());
 app.use(express.static(p));
-app.use(express.json);
 app.use(passport.initialize());
 app.use(apiRouter);
 
