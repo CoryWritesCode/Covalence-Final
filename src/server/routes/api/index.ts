@@ -6,12 +6,12 @@ import categoriesRouter from './categories';
 
 const router = express.Router();
 
-// router.use((req, res, next) => {
-//   passport.authenticate('Bearer', { session: false }, (err, user, info) => {
-//     if (user) req.user = user;
-//     return next();
-//   })(req, res, next);
-// });
+router.use((req, res, next) => {
+  passport.authenticate('bearer', { session: false }, (err, user, info) => {
+    if (user) req.user = user;
+    return next();
+  })(req, res, next);
+});
 
 router.use('/users', usersRouter);
 router.use('/books', booksRouter);
