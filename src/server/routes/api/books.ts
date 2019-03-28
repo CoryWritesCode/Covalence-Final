@@ -5,6 +5,7 @@ import { RequestHandler } from 'express-serve-static-core';
 const router = express.Router();
 
 const isAdmin: RequestHandler = (req, res, next) => {
+  console.log(req.user)
   if (!req.user || req.user.role !== 'admin') {
     return res.sendStatus(410);
   }
@@ -14,7 +15,7 @@ const isAdmin: RequestHandler = (req, res, next) => {
 router.get('/:id?', async (req, res) => {
   if (req.params.id) {
     try {
-      let result = await DB.Books.one(req.params.id);
+      let [result] = await DB.Books.one(req.params.id);
       res.json(result);
     } catch (e) {
       console.error(e);
@@ -41,7 +42,7 @@ router.post('/new', async (req, res) => {
   }
 });
 
-router.delete('/:id', isAdmin, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     let result = await DB.Books.del(req.params.id);
     res.json(result);
@@ -51,7 +52,7 @@ router.delete('/:id', isAdmin, async (req, res) => {
   }
 });
 
-router.put('/:id', isAdmin, async (req, res) => {
+router.put('/:id/edit', async (req, res) => {
   try {
     let id = req.params.id;
     let catId = req.body.categoryId;

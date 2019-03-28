@@ -5,7 +5,7 @@ import Create from '../public/Create';
 import Books from '../public/Books';
 import Login from '../admin/Login';
 import Admin from '../admin/Admin';
-// import Edit from '../admin/Edit';
+import Edit from '../admin/Edit';
 
 export default function App () {
     return (
@@ -21,7 +21,7 @@ export default function App () {
                     <Route exact path="/books" component={Books} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/admin" component={Admin} />
-                    {/* <Route exact path="/books/:id/edit" component={Edit} /> */}
+                    <Route exact path="/books/:id/edit" component={Edit} />
                     <Route exact path="/books/new" component={Create} />
                 </>
             </Router>

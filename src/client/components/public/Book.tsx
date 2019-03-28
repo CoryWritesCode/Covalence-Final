@@ -10,7 +10,7 @@ interface P {
   editable?: boolean,
   deleteable?: boolean,
   key: number,
-  handleClick?: any
+  onClick?: any
 }
 
 export default function Book (props: P) {
@@ -18,7 +18,7 @@ export default function Book (props: P) {
   if (props.deleteable) {
     buttons = [
       <React.Fragment>
-        <a handleClick={this.props.id} className="card-link">Delete</a>
+        <button onClick={props.onClick} className="card-link">Delete</button>
       </React.Fragment>
     ]
   } else if (props.editable) {

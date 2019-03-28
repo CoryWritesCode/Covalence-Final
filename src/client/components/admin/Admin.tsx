@@ -29,7 +29,7 @@ export default class Admin extends React.Component<P, S> {
       this.props.history.push('/login');
     }
     try {
-      let user = await json(`api/users/${User.userid}`)
+      let user = await json(`http://localhost:3000/api/users/${User.userid}`)
       this.setState({
         user: user
       })
@@ -38,7 +38,7 @@ export default class Admin extends React.Component<P, S> {
       throw e;
     }
     try {
-      let books = await json('/api/books');
+      let books = await json('http://localhost:3000/api/books');
       this.setState({
         books: books
       });
