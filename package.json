@@ -1,7 +1,7 @@
 {
-  "name": "barebones-react-typescript-express",
+  "name": "cory_covalence_final",
   "version": "1.0.0",
-  "description": "",
+  "description": "Covalence Final",
   "main": "dist/server.js",
   "scripts": {
     "watch:build": "npx webpack -w",

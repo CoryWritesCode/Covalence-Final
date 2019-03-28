@@ -44,5 +44,9 @@ export const LogoutUser = () => {
 }
 
 export default {
-  
+  AccessToken,
+  User,
+  json,
+  SetAccessToken,
+  LogoutUser
 }
