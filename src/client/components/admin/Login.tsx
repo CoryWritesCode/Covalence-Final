@@ -31,18 +31,19 @@ export default class Login extends React.Component<P, S> {
 
     try {
       this.loggingIn = true;
-      this.setState({ loginFailed: false }); //Resets the error Alert is there was an error
+      this.setState({ loginFailed: false });
 
       let result = await json('/auth/login', 'POST',
         {
           email: this.state.email,
           password: this.state.password
+
         });
 
       if (result) {
         console.log(result);
         SetAccessToken(result.token, { userid: result.userid, role: result.role });
-        if (result.role === 'admin') {
+        if (result.role == 'admin') {
           this.props.history.push('/admin');
         } else {
           this.props.history.push('/');

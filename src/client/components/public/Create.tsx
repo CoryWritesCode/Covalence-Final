@@ -10,7 +10,7 @@ interface P extends RouteComponentProps<{ id: string }> {
 interface S {
   title: string,
   author: string,
-  price: number,
+  price: any,
   category: string,
   saveStatus: string
 }
@@ -22,7 +22,7 @@ export default class Create extends React.Component<P, S> {
     this.state = {
       title: '',
       author: '',
-      price: null,
+      price: '',
       category: '',
       saveStatus: null
     }
@@ -35,7 +35,7 @@ export default class Create extends React.Component<P, S> {
 
   private saving: boolean = false;
 
-  componentDidMount() {
+  async componentWillMount() {
     if (!User || User.id === null || User.role !== 'admin') {
       this.props.history.replace('/login');
     }
@@ -76,20 +76,20 @@ export default class Create extends React.Component<P, S> {
 
   handleTagChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      tag: e.target.value
+      category: e.target.value
     });
   }
 
   handleContentChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     this.setState({
-      content: e.currentTarget.value
+      price: e.currentTarget.value
     });
   }
 
   render() {
     let button: object;
 
-    if (this.state.content.length < 1) {
+    if (this.state.author.length < 1) {
       button = <button
         className="btn btn-outline-light"
         type="button">
@@ -112,12 +112,8 @@ export default class Create extends React.Component<P, S> {
 
     return (
       <React.Fragment
-        key={this.props.match.params.id}>
-        <div className="card text-white bg-success mb-3"
-          style={{
-            margin: '20px',
-            fontWeight: 'bold'
-          }}>
+        >
+        <div className="card mb-3">
           <form>
             <div className="form-group"
               style={{
@@ -137,7 +133,7 @@ export default class Create extends React.Component<P, S> {
                 paddingLeft: '20px',
                 paddingRight: '20px'
               }}>
-              <label>Tags:</label>
+              <label>Category:</label>
               <input
                 type="text"
                 className="form-control"
@@ -149,10 +145,10 @@ export default class Create extends React.Component<P, S> {
                 paddingLeft: '20px',
                 paddingRight: '20px'
               }}>
-              <label>Content:</label>
+              <label>Price:</label>
               <textarea
                 className="form-control"
-                value={this.state.content}
+                value={this.state.price}
                 onChange={this.handleContentChange} />
             </div>
             <div style={{

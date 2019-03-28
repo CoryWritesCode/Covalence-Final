@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { json, User, LogoutUser } from '../../utils/api';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import Book from '../public/Book';
 
 interface P extends RouteComponentProps {
@@ -48,6 +48,10 @@ export default class Admin extends React.Component<P, S> {
     }
   }
 
+  handleLogOut () {
+    LogoutUser();
+  }
+
   render () {
     var {
       books,
@@ -58,6 +62,8 @@ export default class Admin extends React.Component<P, S> {
     return (
       <React.Fragment>
         <h2>Admin</h2>
+        <Link to="books/new">New</Link>
+        <button className="btn btn-danger" onClick={this.handleLogOut}>Log Out</button>
         <React.Fragment>
           {keys.map((val: any) => {
             let categoryid: number = books[val].categoryid;
