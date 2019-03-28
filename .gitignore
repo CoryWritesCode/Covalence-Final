@@ -1,5 +1,4 @@
 node_modules/
-dist/
+dist/*
 public/js/app.js
 src/server/config/development.ts
-dist/server.js
