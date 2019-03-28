@@ -9,7 +9,11 @@ interface P extends RouteComponentProps<{ id: string }> {
 
 interface S {
   book: { [x: string]: any; },
-  deleteable: boolean
+  deleteable: boolean,
+  title: string,
+  author: string,
+  category: string,
+  price: string
 }
 
 export default class Edit extends React.Component<P, S> {
@@ -19,7 +23,11 @@ export default class Edit extends React.Component<P, S> {
 
     this.state = {
       book: {},
-      deleteable: true
+      deleteable: true,
+      title: '',
+      author: '',
+      category: '',
+      price: '',
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -42,6 +50,14 @@ export default class Edit extends React.Component<P, S> {
 
   }
 
+  save = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+
+    }
+  }
+
   render () {
     var {
       deleteable,
@@ -60,6 +76,56 @@ export default class Edit extends React.Component<P, S> {
           id={`${book.id}`}
           onClick={this.handleClick}
         />
+        <form
+          className="col-md-4 offset-md-4"
+          onSubmit={this.save}>
+          <div className="form-row">
+            <div className="col form-group">
+              <label className="login-label">Welcome back!</label>
+              <input
+                className="form-control"
+                type="text"
+                value={book.author}
+                onChange={(e) => { this.setState({ author: e.target.value }) }}
+                required />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="col form-group">
+              <input
+                className="form-control"
+                type="text"
+                value={book.title}
+                onChange={(e) => { this.setState({ title: e.target.value }) }}
+                required />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="col form-group">
+              <input
+                className="form-control"
+                type="text"
+                value={book.category}
+                onChange={(e) => { this.setState({ category: e.target.value }) }}
+                required />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="col form-group">
+              <input
+                className="form-control"
+                type="text"
+                value={`$${book.price}`}
+                onChange={(e) => { this.setState({ price: e.target.value }) }}
+                required />
+            </div>
+          </div>
+          <div className="form-row form-group">
+            <div className="col">
+              <button className="btn btn-outline-dark btn-lg w-100">Save</button>
+            </div>
+          </div>
+        </form>
       </React.Fragment>
     )
   }

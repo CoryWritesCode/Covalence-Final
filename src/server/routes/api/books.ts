@@ -16,6 +16,8 @@ router.get('/:id?', async (req, res) => {
   if (req.params.id) {
     try {
       let [result] = await DB.Books.one(req.params.id);
+      let [category] = await DB.Categories.one(result.categoryid)
+      result['categoryname'] = category.name;
       res.json(result);
     } catch (e) {
       console.error(e);
