@@ -34,8 +34,6 @@ export default class Login extends React.Component<P, S> {
     if (this.loggingIn) return; //Check if there is a login request alreaady happening
 
     try {
-      this.loggingIn = true;
-      this.setState({ loginFailed: false });
 
       let result = await json('/auth/login', 'POST',
         {
@@ -64,7 +62,14 @@ export default class Login extends React.Component<P, S> {
 
   register = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-
+      let result = await json('auth/register', 'POST', {
+        email: this.state.email,
+        password: this.state.password,
+        name: this.state.name
+      });
+      if (result) {
+        this.props.history.push('/admin');
+      }
     } catch (e) {
       console.error(e);
       throw e;
