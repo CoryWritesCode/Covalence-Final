@@ -5,9 +5,11 @@ import { json, SetAccessToken } from '../../utils/api';
 
 interface P extends RouteComponentProps { }
 interface S {
-  loginFailed: boolean;
-  email: string;
-  password: string;
+  loginFailed: boolean,
+  email: string,
+  password: string,
+  register: boolean,
+  name: string
 }
 
 export default class Login extends React.Component<P, S> {
@@ -17,7 +19,9 @@ export default class Login extends React.Component<P, S> {
     this.state = {
       email: '',
       password: '',
-      loginFailed: false
+      loginFailed: false,
+      register: false,
+      name: ''
     }
   }
 
@@ -58,13 +62,41 @@ export default class Login extends React.Component<P, S> {
     }
   }
 
+  register = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
   render() {
 
-    let alert;
-    if (this.state.loginFailed) {
-      console.log("Get outta here!");
+    let button;
+    if (this.state.register) {
+      button = [
+        <React.Fragment>
+          <div className="form-row">
+            <div className="col form-group">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Name"
+                onChange={(e) => { this.setState({ name: e.target.value }) }}
+                required />
+            </div>
+          </div>
+          <button onClick={this.register} className="btn btn-outline-dark btn-lg w-100">Register</button>
+        </React.Fragment>
+      ]
     } else {
-      alert = null;
+      button = [
+        <React.Fragment>
+          <button className="btn btn-outline-dark btn-lg w-100">Login</button>
+          <button onClick={() => { this.setState({ register: true }) }} className="btn btn-outline-dark btn-lg w-100">Not Registered?</button>
+        </React.Fragment>
+      ]
     }
 
     return (
@@ -97,7 +129,7 @@ export default class Login extends React.Component<P, S> {
               </div>
               <div className="form-row form-group">
                 <div className="col">
-                  <button className="btn btn-outline-dark btn-lg w-100">Login</button>
+                  {button}
                 </div>
               </div>
             </form>
