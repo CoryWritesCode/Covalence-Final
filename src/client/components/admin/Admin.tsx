@@ -91,8 +91,7 @@ export default class Admin extends React.Component<P, S> {
               title={title}
               key={id}
               price={price}
-              id={`${id}`}
-              onClick={this.handleDelete} />
+              id={`${id}`} />
           })}
         </React.Fragment>
       </React.Fragment>

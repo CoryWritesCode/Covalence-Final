@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 interface P {
   categoryid: number,
@@ -7,18 +8,23 @@ interface P {
   title: string,
   price: number,
   editable?: boolean,
+  deleteable?: boolean,
   key: number,
   handleClick?: any
-  handleDelete?: any
 }
 
 export default function Book (props: P) {
   let buttons;
-  if (props.editable) {
+  if (props.deleteable) {
     buttons = [
       <React.Fragment>
-        <a onClick={props.handleClick} className="card-link">Edit</a>
-        <a onClick={props.handleDelete(props.id)} className="card-link">Delete</a>
+        <a handleClick={this.props.id} className="card-link">Delete</a>
+      </React.Fragment>
+    ]
+  } else if (props.editable) {
+    buttons = [
+      <React.Fragment>
+        <Link to={`/books/${props.id}/edit`} className="card-link">Edit</Link>
       </React.Fragment>
     ];
   } else {
@@ -26,8 +32,8 @@ export default function Book (props: P) {
   }
 
   return (
-    <div id={props.id} className="d-flex flex-wrap">
-      <div className="card" key={props.key} style={{ width: '18rem'}} >
+    <div id={props.id} key={(props.id + 10)} className="d-flex flex-wrap">
+      <div className="card"  style={{ width: '18rem'}} >
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">{props.author}</h6>
