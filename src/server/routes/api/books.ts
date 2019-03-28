@@ -31,7 +31,7 @@ router.get('/:id?', async (req, res) => {
   }
 });
 
-router.post('/', isAdmin, async (req, res) => {
+router.post('/new', async (req, res) => {
   try {
     let result = await DB.Books.insert(req.body);
     res.json(result);

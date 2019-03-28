@@ -52,6 +52,19 @@ export default class Admin extends React.Component<P, S> {
     LogoutUser();
   }
 
+  handleDelete = async (id: number) => {
+    if (!User || User.userid === null || User.userid === undefined) {
+      this.props.history.push('/login');
+    }
+    try {
+      await json(`api/books/${id}`, 'DELETE')
+      window.location.reload();
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
   render () {
     var {
       books,
@@ -78,7 +91,8 @@ export default class Admin extends React.Component<P, S> {
               title={title}
               key={id}
               price={price}
-              id={`${id}`} />
+              id={`${id}`}
+              onClick={this.handleDelete} />
           })}
         </React.Fragment>
       </React.Fragment>

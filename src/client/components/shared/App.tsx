@@ -21,7 +21,7 @@ export default function App () {
                     <Route exact path="/books" component={Books} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/admin" component={Admin} />
-                    <Route exact path="/books/:id" component={Edit} />
+                    <Route exact path="/books/:id/edit" component={Edit} />
                     <Route exact path="/books/new" component={Create} />
                 </>
             </Router>

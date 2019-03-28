@@ -28,9 +28,6 @@ export default class Create extends React.Component<P, S> {
     }
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleContentChange = this.handleContentChange.bind(this);
-    this.handleTagChange = this.handleTagChange.bind(this);
   }
 
   private saving: boolean = false;
@@ -68,36 +65,18 @@ export default class Create extends React.Component<P, S> {
     };
   }
 
-  handleTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      title: e.target.value
-    });
-  }
-
-  handleTagChange(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      category: e.target.value
-    });
-  }
-
-  handleContentChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({
-      price: e.currentTarget.value
-    });
-  }
-
   render() {
     let button: object;
 
     if (this.state.author.length < 1) {
       button = <button
-        className="btn btn-outline-light"
+        className="btn btn-outline-dark"
         type="button">
         Publish
                   </button>
     } else {
       button = <button
-        className="btn btn-outline-light"
+        className="btn btn-outline-dark"
         type="button"
         onClick={this.handleClick}>
         Publish
@@ -126,7 +105,20 @@ export default class Create extends React.Component<P, S> {
                 type="text"
                 className="form-control"
                 placeholder="Enter title"
-                onChange={this.handleTitleChange}></input>
+                onChange={(e) => {this.setState({ title: e.target.value })}}></input>
+            </div>
+            <div className="form-group"
+              style={{
+                paddingLeft: '20px',
+                paddingRight: '20px',
+                paddingTop: '20px'
+              }}>
+              <label>Author:</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter title"
+                onChange={(e) => { this.setState({ author: e.target.value }) }}></input>
             </div>
             <div className="form-group"
               style={{
@@ -138,7 +130,7 @@ export default class Create extends React.Component<P, S> {
                 type="text"
                 className="form-control"
                 placeholder="(Optional)"
-                onChange={this.handleTagChange}></input>
+                onChange={(e) => { this.setState({ category: e.target.value }) }}></input>
             </div>
             <div className="form-group"
               style={{
@@ -149,7 +141,7 @@ export default class Create extends React.Component<P, S> {
               <textarea
                 className="form-control"
                 value={this.state.price}
-                onChange={this.handleContentChange} />
+                onChange={(e) => { this.setState({ price: e.target.value }) }} />
             </div>
             <div style={{
               paddingLeft: '20px',
