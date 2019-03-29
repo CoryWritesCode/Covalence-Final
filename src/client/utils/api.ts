@@ -1,12 +1,12 @@
 import * as fetch from 'isomorphic-fetch';
 
 export let AccessToken: string = localStorage.getItem('token') || null;
-export let User: any = {
+export let User: {} = {
   userid: localStorage.getItem('userid') || null,
   role: localStorage.getItem('role') || null
 };
 
-export const json = async (uri: string, method: string = 'GET', body?: any) => {
+export const json = async (uri: string, method: string = 'GET', body?: {}) => {
   let headers: any = {
     'Content-Type': 'application/json'
   };

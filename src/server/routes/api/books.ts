@@ -80,22 +80,21 @@ router.put('/:id/edit', async (req, res) => {
     } catch (e) {
       console.error(e);
       res.sendStatus(500);
-    }
+    } 
   } else {
-      try {
-        let id = req.params.id;
-        let category = req.body.category;
-        let title = req.body.title;
-        let author = req.body.author;
-        let price = req.body.price;
-        let result = await DB.Books.updateWithNewCategory(id, category, title, author, price);
-        res.json(result);
-      } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
-      }
+    try {
+      let id = req.params.id;
+      let category = req.body.category;
+      let title = req.body.title;
+      let author = req.body.author;
+      let price = req.body.price;
+      let result = await DB.Books.updateWithNewCategory(id, category, title, author, price);
+      res.json(result);
+    } catch (e) {
+      console.error(e);
+      res.sendStatus(500);
     }
   }
-})
+});
 
 export default router;

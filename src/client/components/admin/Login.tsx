@@ -81,7 +81,7 @@ export default class Login extends React.Component<P, S> {
     let button;
     if (this.state.register) {
       button = [
-        <React.Fragment>
+        <React.Fragment key={12344}>
           <div className="form-row">
             <div className="col form-group">
               <input
@@ -97,7 +97,7 @@ export default class Login extends React.Component<P, S> {
       ]
     } else {
       button = [
-        <React.Fragment>
+        <React.Fragment key={12344}>
           <button className="btn btn-outline-dark btn-lg w-100">Login</button>
           <button onClick={() => { this.setState({ register: true }) }} className="btn btn-outline-dark btn-lg w-100">Not Registered?</button>
         </React.Fragment>

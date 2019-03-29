@@ -18,13 +18,13 @@ export default function Book (props: P) {
   let buttons;
   if (props.deleteable) {
     buttons = [
-      <React.Fragment>
+      <React.Fragment key={(props.id + 33)}>
         <button onClick={props.onClick} className="card-link">Delete</button>
       </React.Fragment>
     ]
   } else if (props.editable) {
     buttons = [
-      <React.Fragment>
+      <React.Fragment key={(props.id + 33)}>
         <Link to={`/books/${props.id}/edit`} className="card-link">Edit</Link>
       </React.Fragment>
     ];
@@ -34,7 +34,7 @@ export default function Book (props: P) {
 
   return (
     <div id={props.id} key={(props.id + 10)} className="d-flex flex-wrap">
-      <div className="card"  style={{ width: '18rem'}} >
+      <div className="card" key={(props.id + 3)} style={{ width: '18rem'}} >
         <div className="card-body">
           <h4 className="card-title">{props.title}</h4>
           <h5 className="card-subtitle mb-2 text-muted">{props.author}</h5>
