@@ -48,8 +48,6 @@ router.post('/new', async (req, res) => {
   } else {
     try {
       let [category] = await DB.Categories.insert(req.body.category);
-      console.log('inside')
-      console.log(category);
       let result = await DB.Books.insert(category.insertId, req.body.title, req.body.author, req.body.price);
       res.json(result);
     } catch (e) {
@@ -70,7 +68,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.put('/:id/edit', async (req, res) => {
-  let [category] = await DB.Categories.oneByName(req.body.catergoryname);
+  let [category] = await DB.Categories.oneByName(req.body.category);
   if (category) {
     try {
       let id = req.params.id;
@@ -85,16 +83,16 @@ router.put('/:id/edit', async (req, res) => {
       res.sendStatus(500);
     }
   } else {
-    let [category] = await DB.Categories.insert(req.body.catergoryname);
+    console.log(req.body.category)
+    let [category] = await DB.Categories.insert(req.body.category);
     if (category) {
-      let obj = {
-        categoryid: category.insertId,
-        title: req.body.title,
-        author: req.body.author,
-        price: req.body.price
-      }
       try {
-        let result = await DB.Books.insert(obj);
+        let id = req.params.id;
+        let catId = category.id;
+        let title = req.body.title;
+        let author = req.body.author;
+        let price = req.body.price;
+        let result = await DB.Books.update(id, catId, title, author, price);
         res.json(result);
       } catch (e) {
         console.error(e);

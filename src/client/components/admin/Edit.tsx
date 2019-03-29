@@ -54,7 +54,7 @@ export default class Edit extends React.Component<P, S> {
     e.preventDefault();
 
     let body = {
-      categoryname: this.state.category,
+      category: this.state.category,
       title: this.state.title,
       author: this.state.author,
       price: this.state.price

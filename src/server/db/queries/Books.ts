@@ -4,7 +4,7 @@ const all = async () => Query('SELECT * FROM Books;');
 
 const one = async (id: number) => Query('SELECT * FROM Books WHERE id = ?;', [id]);
 
-const insert = async (categoryid, title, author, price) => Query('INSERT INTO Books (categoryid, title, author, price) VALUES (?, ?, ?, ?);', [categoryid, title, author, price]);
+const insert = async (categoryid: number, title: string, author: string, price: number) => Query('INSERT INTO Books (categoryid, title, author, price) VALUES (?, ?, ?, ?);', [categoryid, title, author, price]);
 
 const del = async (id: number) => Query('DELETE FROM Books WHERE id = ?;', [id]);
 
