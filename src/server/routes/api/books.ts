@@ -47,8 +47,7 @@ router.post('/new', async (req, res) => {
     }
   } else {
     try {
-      let [category] = await DB.Categories.insert(req.body.category);
-      let result = await DB.Books.insert(category.insertId, req.body.title, req.body.author, req.body.price);
+      let result = await DB.Books.insertWithNewCategory(req.body.category, req.body.title, req.body.author, req.body.price);
       res.json(result);
     } catch (e) {
       console.error(e);
@@ -83,16 +82,13 @@ router.put('/:id/edit', async (req, res) => {
       res.sendStatus(500);
     }
   } else {
-    console.log(req.body.category)
-    let [category] = await DB.Categories.insert(req.body.category);
-    if (category) {
       try {
         let id = req.params.id;
-        let catId = category.id;
+        let category = req.body.category;
         let title = req.body.title;
         let author = req.body.author;
         let price = req.body.price;
-        let result = await DB.Books.update(id, catId, title, author, price);
+        let result = await DB.Books.updateWithNewCategory(id, category, title, author, price);
         res.json(result);
       } catch (e) {
         console.error(e);

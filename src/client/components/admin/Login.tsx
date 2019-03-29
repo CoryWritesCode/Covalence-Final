@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { json, SetAccessToken } from '../../utils/api';
+import { json, SetAccessToken, User } from '../../utils/api';
 
 interface P extends RouteComponentProps { }
 interface S {
@@ -35,7 +35,7 @@ export default class Login extends React.Component<P, S> {
 
     try {
 
-      let result = await json('/auth/login', 'POST',
+      let result = await json('http://localhost:3000/auth/login', 'POST',
         {
           email: this.state.email,
           password: this.state.password
@@ -62,7 +62,7 @@ export default class Login extends React.Component<P, S> {
 
   register = async (e: any) => {
     try {
-      let result = await json('auth/register', 'POST', {
+      let result = await json('http://localhost:3000/auth/register', 'POST', {
         email: this.state.email,
         password: this.state.password,
         name: this.state.name
