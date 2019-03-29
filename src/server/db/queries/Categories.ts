@@ -6,7 +6,7 @@ const oneById = async (id: number) => Query('SELECT * FROM Categories WHERE id =
 
 const oneByName = async (name: string) => Query('SELECT * FROM Categories WHERE name = ?;', [name]);
 
-const insert = async (name: string) => Query('INSTER INTO Categories (name) VALUES (?);', [name]);
+const insert = async (name: string) => Query('INSERT INTO Categories (name) VALUES (?);', [name]);
 
 const del = async (id: number) => Query('DELETE FROM Categories WHERE id = ?;', [id]);
 

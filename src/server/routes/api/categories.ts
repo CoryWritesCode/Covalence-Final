@@ -31,9 +31,9 @@ router.get('/:id?', async (req, res) => {
   }
 });
 
-router.post('/', isAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    let result = await DB.Categories.insert(req.body);
+    let result = await DB.Categories.insert(req.body.category);
     res.json(result);
   } catch (e) {
     console.error(e);
@@ -41,7 +41,7 @@ router.post('/', isAdmin, async (req, res) => {
   }
 });
 
-router.delete('/:id', isAdmin, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     let result = await DB.Categories.del(req.params.id);
     res.json(result);
@@ -51,7 +51,7 @@ router.delete('/:id', isAdmin, async (req, res) => {
   }
 });
 
-router.put('/:id', isAdmin, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     let id = req.params.id;
     let name = req.params.name;

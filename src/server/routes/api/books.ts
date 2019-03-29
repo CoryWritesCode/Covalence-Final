@@ -1,7 +1,6 @@
 import * as express from 'express';
 import DB from '../../db';
 import { RequestHandler } from 'express-serve-static-core';
-import Categories from '../../db/queries/Categories';
 
 const router = express.Router();
 
@@ -36,39 +35,26 @@ router.get('/:id?', async (req, res) => {
 });
 
 router.post('/new', async (req, res) => {
-  console.log(req.body.category)
-  let [category] = await DB.Categories.oneByName(req.body.catergory);
+  let [category] = await DB.Categories.oneByName(req.body.category);
   console.log(category)
   if (category) {
-    let obj = {
-      categoryid: category.id,
-      title: req.body.title,
-      author: req.body.author,
-      price: req.body.price
-    }
     try {
-      let result = await DB.Books.insert(obj);
+      let result = await DB.Books.insert(category.id, req.body.title, req.body.author, req.body.price);
       res.json(result);
     } catch (e) {
       console.error(e);
       res.sendStatus(500);
     }
   } else {
-    let [category] = await DB.Categories.insert(req.body.category);
-    if (category) {
-      let obj = {
-        categoryid: category.insertId,
-        title: req.body.title,
-        author: req.body.author,
-        price: req.body.price
-      }
-      try {
-        let result = await DB.Books.insert(obj);
-        res.json(result);
-      } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
-      }
+    try {
+      let [category] = await DB.Categories.insert(req.body.category);
+      console.log('inside')
+      console.log(category);
+      let result = await DB.Books.insert(category.insertId, req.body.title, req.body.author, req.body.price);
+      res.json(result);
+    } catch (e) {
+      console.error(e);
+      res.sendStatus(500);
     }
   }
 });
