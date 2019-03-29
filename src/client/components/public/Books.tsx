@@ -44,14 +44,14 @@ export default class Books extends React.Component<P, S> {
     return (
       <React.Fragment>
         {keys.map((val: any) => {
-          let categoryid: number = books[val].categoryid;
+          let categoryname: string = books[val].categoryname;
           let id: number = books[val].id;
           let author: string = books[val].author;
           let title: string = books[val].title;
           let price: number = books[val].price;
           return <Book
             editable={editable}
-            categoryid={categoryid}
+            categoryname={categoryname}
             author={author}
             title={title}
             key={id}

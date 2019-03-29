@@ -14,7 +14,7 @@ const isAdmin: RequestHandler = (req, res, next) => {
 router.get('/:id?', async (req, res) => {
   if (req.params.id) {
     try {
-      let result = await DB.Categories.one(req.params.id);
+      let result = await DB.Categories.oneById(req.params.id);
       res.json(result);
     } catch (e) {
       console.error(e);

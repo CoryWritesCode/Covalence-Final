@@ -60,7 +60,7 @@ export default class Login extends React.Component<P, S> {
     }
   }
 
-  register = async (e: React.FormEvent<HTMLFormElement>) => {
+  register = async (e: any) => {
     try {
       let result = await json('auth/register', 'POST', {
         email: this.state.email,

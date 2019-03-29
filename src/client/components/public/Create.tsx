@@ -44,7 +44,7 @@ export default class Create extends React.Component<P, S> {
 
     let obj = {
       title: this.state.title,
-      authorid: User.userId,
+      author: this.state.author,
       price: this.state.price,
       category: this.state.category
     }
@@ -58,7 +58,7 @@ export default class Create extends React.Component<P, S> {
         this.setState({ saveStatus: 'error' });
       }
 
-      this.props.history.replace('/');
+      this.props.history.replace('/admin');
     } catch (e) {
       this.setState({ saveStatus: 'error' });
       console.log(e)

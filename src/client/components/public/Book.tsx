@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 interface P {
-  categoryid: number,
+  categoryname?: string,
+  categoryid?: number,
   author: string,
   id: string,
   title: string,
@@ -35,8 +36,9 @@ export default function Book (props: P) {
     <div id={props.id} key={(props.id + 10)} className="d-flex flex-wrap">
       <div className="card"  style={{ width: '18rem'}} >
         <div className="card-body">
-          <h5 className="card-title">{props.title}</h5>
-          <h6 className="card-subtitle mb-2 text-muted">{props.author}</h6>
+          <h4 className="card-title">{props.title}</h4>
+          <h5 className="card-subtitle mb-2 text-muted">{props.author}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">{props.categoryname}</h6>
           <p className="card-text">${props.price}</p>
           {buttons}
         </div>

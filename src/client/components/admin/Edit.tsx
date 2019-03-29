@@ -53,22 +53,37 @@ export default class Edit extends React.Component<P, S> {
   save = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
+    let body = {
+      categoryname: this.state.category,
+      title: this.state.title,
+      author: this.state.author,
+      price: this.state.price
+    }
 
+    try {
+      await json(`http://localhost:3000/api/books/${this.state.book.id}/edit`, 'PUT', body);
+      this.props.history.push('/admin');
+    } catch (e) {
+      console.error(e);
+      throw e;
     }
   }
 
   render () {
     var {
       deleteable,
-      book
+      book,
+      title,
+      author,
+      category,
+      price
     } = this.state;
 
     return (
       <React.Fragment>
         <Book 
           deleteable={deleteable}
-          categoryid={book.categoryid}
+          categoryname={book.categoryname}
           author={book.author}
           title={book.title}
           key={book.id}
@@ -81,43 +96,43 @@ export default class Edit extends React.Component<P, S> {
           onSubmit={this.save}>
           <div className="form-row">
             <div className="col form-group">
-              <label className="login-label">Welcome back!</label>
+              <label className="login-label">Edit Carefully</label>
               <input
                 className="form-control"
-                type="text"
-                value={book.author}
+                value={author}
+                placeholder="Author"
                 onChange={(e) => { this.setState({ author: e.target.value }) }}
-                required />
+                 />
             </div>
           </div>
           <div className="form-row">
             <div className="col form-group">
               <input
                 className="form-control"
-                type="text"
-                value={book.title}
+                value={title}
+                placeholder="Title"
                 onChange={(e) => { this.setState({ title: e.target.value }) }}
-                required />
+                 />
             </div>
           </div>
           <div className="form-row">
             <div className="col form-group">
               <input
                 className="form-control"
-                type="text"
-                value={book.category}
+                value={category}
+                placeholder="Category"
                 onChange={(e) => { this.setState({ category: e.target.value }) }}
-                required />
+                 />
             </div>
           </div>
           <div className="form-row">
             <div className="col form-group">
               <input
                 className="form-control"
-                type="text"
-                value={`$${book.price}`}
+                value={`${price}`}
+                placeholder="Price"
                 onChange={(e) => { this.setState({ price: e.target.value }) }}
-                required />
+                 />
             </div>
           </div>
           <div className="form-row form-group">

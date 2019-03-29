@@ -2,7 +2,9 @@ import { Query } from '../index';
 
 const all = async () => Query('SELECT * FROM Categories;');
 
-const one = async (id: number) => Query('SELECT * FROM Categories WHERE id = ?;', [id]);
+const oneById = async (id: number) => Query('SELECT * FROM Categories WHERE id = ?;', [id]);
+
+const oneByName = async (name: string) => Query('SELECT * FROM Categories WHERE name = ?;', [name]);
 
 const insert = async (name: string) => Query('INSTER INTO Categories (name) VALUES (?);', [name]);
 
@@ -12,7 +14,8 @@ const update = async (id: number, name: string) => Query('UPDATE Categories SET 
 
 export default {
   all,
-  one,
+  oneById,
+  oneByName,
   insert,
   del,
   update
