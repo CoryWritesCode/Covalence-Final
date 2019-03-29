@@ -25,13 +25,13 @@ export default class Login extends React.Component<P, S> {
     }
   }
 
-  private loggingIn = false; //Used to prevent double clicks on the login button
+  private loggingIn = false;
 
   login = async (e: React.FormEvent<HTMLFormElement>) => {
 
     e.preventDefault();
 
-    if (this.loggingIn) return; //Check if there is a login request alreaady happening
+    if (this.loggingIn) return;
 
     try {
 

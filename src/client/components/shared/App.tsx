@@ -6,8 +6,14 @@ import Books from '../public/Books';
 import Login from '../admin/Login';
 import Admin from '../admin/Admin';
 import Edit from '../admin/Edit';
+import { User } from '../../utils/api';
 
 export default function App () {
+    let admin;
+    if (localStorage.getItem('role') == 'admin') {
+        admin = <Link to="/admin">Admin</Link>;
+    }
+
     return (
         <React.Fragment>
             <Router>
@@ -15,14 +21,15 @@ export default function App () {
                     <Link to='/'>Home</Link>
                     <Link to="/books">Books</Link>
                     <Link to="/login">Login</Link>
-                    <Link to="/admin">Admin</Link>  
-                                   
+                    {admin}  
+                <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/books" component={Books} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/admin" component={Admin} />
                     <Route exact path="/books/:id/edit" component={Edit} />
                     <Route exact path="/books/new" component={Create} />
+                </Switch>
                 </>
             </Router>
         </React.Fragment>

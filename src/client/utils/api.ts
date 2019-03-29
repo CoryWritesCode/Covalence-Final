@@ -33,6 +33,9 @@ export const json = async (uri: string, method: string = 'GET', body?: {}) => {
 };
 
 export const SetAccessToken = (token: string, user: any = { userid: undefined, role: 'guest' }) => {
+  AccessToken = token;
+  User = user;
+
   localStorage.setItem('token', token);
   localStorage.setItem('role', user.role);
   localStorage.setItem('userid', user.userid);
